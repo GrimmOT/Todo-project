@@ -9,20 +9,52 @@
     initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/reset.css'%}">
     <link rel="stylesheet" href="{% static "css/style.css"%}">
-    <title>TODO list</title>
+    <title>{{ title }}</title>
 </head>
 <body>
     <header>
         <img src="{% static "img/To-Do-Logo 1.svg"%}" alt="">
     </header>
-    <div class="add-to-wraper">
-        <div class="input-field">
-            <input type="text" placeholder="What do you need to do?">
+    <main>
+        <div class="add-to-wraper">
+            <div class="input-field">
+                <input type="text" placeholder="What do you need to do?">
+            </div>
+            <div class="Add-button">
+                <p>ADD</p>
+            </div>
         </div>
-        <div class="Add-button">
-            <p>ADD</p>
+        <div class="TODO-list">
+            {% for task in tasks %}
+                <div class="task">
+                    <div>
+                        {% if task.is_completed %}
+                            <img src="{% static 'img/task-on.svg'%}" alt="" height="30px" width="30px">
+                        {% else %}
+                            <img src="{% static 'img/task-off.svg'%}" alt="" height="30px" width="30px">
+                        {% endif %}
+                    </div>
+                    <div class="task-text 
+                    {% if task.is_completed %}
+                        completed-text
+                    {% endif %}">
+                        <p>{{ task.text }}</p>
+                    </div>
+                    <div>
+                        <img src="{% static 'img/Delete outline.svg'%}" alt="">
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="button-field">
+                <div class="clear-image">
+                    <img src="{% static 'img/Basket.svg'%}" alt="" height="20px" width="20px">
+                </div>
+                <div class="clear-text">
+                    <p>Clear Completed</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </main>
     <script src="{% static 'js/main.js'%}"></script>
 </body>
 </html>
